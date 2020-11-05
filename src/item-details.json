@@ -1,0 +1,131 @@
+{
+    "search": {
+        "label": "Search by ID or Name",
+        "field": [
+            "id",
+            "name"
+        ]
+    },
+    "listPage": [
+        "id",
+        "status",
+        "categoryId"
+    ],
+    "filter": [
+        "categoryId",
+        "status",
+        "id"
+    ],
+    "action": {
+        "CreateEnabled": "true"
+    },
+    "suggestion": {
+        "category": [
+            {
+                "key": "1",
+                "value": "boost"
+            },
+            {
+                "key": "3",
+                "value": "sunsilk"
+            },
+            {
+                "key": "4",
+                "value": "horlicks"
+            }
+        ],
+        "status": [
+            {
+                "key": "1",
+                "value": "Active"
+            },
+            {
+                "key": "2",
+                "value": "InActive"
+            },
+            {
+                "key": "3",
+                "value": "klm"
+            },
+            {
+                "key": "4",
+                "value": "nop"
+            },
+            {
+                "key": "5",
+                "value": "qlm"
+            },
+            {
+                "key": "6",
+                "value": "wxy"
+            }
+        ]
+    },
+    "property": {
+        "id": {
+            "label": "itemID",
+            "importence": "HIGH",
+            "component": "Label",
+            "editComponent": "Input"
+        },
+        "imageLinks": {
+            "label": "Image",
+            "importence": "HIGH",
+            "component": "Avatar"
+        },
+        "name": {
+            "label": "ItemName",
+            "importence": "MEDIUM",
+            "component": "Label"
+        },
+        "categoryId": {
+            "label": "category",
+            "importence": "LOW",
+            "component": "Label",
+            "suggestion": "category",
+            "editComponent": "MultiComboBox"
+        },
+        "subCategoryId": {
+            "label": "SubCategory",
+            "importence": "LOW",
+            "component": "Label"
+        },
+        "status": {
+            "label": "Status",
+            "importence": "MEDIUM",
+            "component": "ObjectStatus",
+            "criticality": "state",
+            "suggestion": "status",
+            "editComponent": "ComboBox"
+        }
+    },
+    "data": [
+        {
+            "id": 2,
+            "categoryId": 5,
+            "subCategoryId": null,
+            "name": "boost",
+            "imageLinks": "http://res.cloudinary.com/dsywyhhdl/image/upload/v1586801720/xinuzgjp24xnyfxg6nsz.jpg",
+            "status": "Active",
+            "state": "Success"
+        },
+        {
+            "id": 3,
+            "categoryId": 2,
+            "subCategoryId": 4,
+            "name": "Mother's Choice White Dried Peas",
+            "imageLinks": "http://res.cloudinary.com/dsywyhhdl/image/upload/v1586961451/gwyiz5h8taf7xpgnymev.jpg",
+            "status": "Active",
+            "state": "Success"
+        },
+        {
+            "id": 4,
+            "categoryId": 4,
+            "subCategoryId": 3,
+            "name": "sunpure Refined sunflower oil",
+            "imageLinks": "http://res.cloudinary.com/dsywyhhdl/image/upload/v1586961451/gwyiz5h8taf7xpgnymev.jpg",
+            "status": "InActive",
+            "state": "Error"
+        }
+    ]
+}

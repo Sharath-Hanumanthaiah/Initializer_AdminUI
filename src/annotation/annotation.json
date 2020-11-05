@@ -1,0 +1,677 @@
+{
+    "itemDetails": {
+        "search": {
+            "label": "Search by ID",
+            "field": [
+                "_id"
+            ]
+        },
+        "filter": [
+            "categoryId",
+            "subCategoryId",
+            "status",
+            "name"
+        ],
+        "listPage": [
+            "id",
+            "imageLinks",
+            "name",
+            "categoryId",
+            "subCategoryId",
+            "status"
+        ],
+        "header": {
+            "headerContent": {
+                "field": [
+                    "status",
+                    "categoryId",
+                    "subCategoryId"
+                ]
+            },
+            "keyInfos": {
+                "field": []
+            },
+            "title": "name",
+            "subTitle": "id",
+            "image": "defaultImage",
+            "headerActions": [
+                {
+                    "type": "CustomAvailabilityAction",
+                    "id": "customAvlAction",
+                    "url": "/markItAvailable"
+                }
+            ]
+        },
+        "action": {
+            "updateEnabled": "true",
+            "deleteEnabled": "false",
+            "CreateEnabled": "true"
+        },
+        "facet": [
+            {
+                "label": "General Information",
+                "id": "GeneralInfo",
+                "type": "fieldGroup",
+                "field": [
+                    "id",
+                    "name",
+                    "categoryId",
+                    "subCategoryId",
+                    "status"
+                ]
+            },
+            {
+                "label": "Description",
+                "id": "description",
+                "type": "fieldGroup",
+                "association": "description",
+                "field": [
+                    "itemProperties",
+                    "sellerName",
+                    "disclaimer"
+                ]
+            },
+            {
+                "label": "Availablity",
+                "id": "availablity",
+                "type": "lineItem",
+                "association": "itemAvailabilities",
+                "contextType": "availability"
+            },
+            {
+                "label": "Image",
+                "id": "image",
+                "type": "imageLinks",
+                "association": "imageLinks"
+            }
+        ],
+        "suggestion": {
+            "category": {
+                "valueType": "standard",
+                "value": "/admin/itemCategory?key=_id&value=name"
+            },
+            "subCategory": {
+                "valueType": "standard",
+                "value": "/admin/itemSubcategory?key=_id&value=name"
+            },
+            "status": {
+                "valueType": "constant",
+                "value": [
+                    {
+                        "key": "Active",
+                        "value": "Active"
+                    },
+                    {
+                        "key": "InActive",
+                        "value": "InActive"
+                    }
+                ]
+            }
+        },
+        "property": {
+            "id": {
+                "label": "itemID",
+                "importence": "HIGH",
+                "component": "Label",
+                "key": "true",
+                "readOnly": "true",
+                "editComponent": "Input"
+            },
+            "imageLinks": {
+                "label": "Image",
+                "importence": "HIGH",
+                "component": "Avatar",
+                "multiple": "true"
+            },
+            "categoryId": {
+                "label": "category",
+                "importence": "LOW",
+                "component": "Label",
+                "suggestion": "category",
+                "editComponent": "ComboBox",
+                "filterComponent": "MultiComboBox",
+                "textAssociation": "categoryName"
+            },
+            "subCategoryId": {
+                "label": "SubCategory",
+                "importence": "LOW",
+                "component": "Label",
+                "suggestion": "subCategory",
+                "editComponent": "ComboBox",
+                "filterComponent": "MultiComboBox",
+                "textAssociation": "subCategoryName"
+            },
+            "name": {
+                "label": "Item Name",
+                "importence": "MEDIUM",
+                "component": "Text",
+                "filterComponent": "Input",
+                "editComponent": "Input"
+            },
+            "status": {
+                "label": "Status",
+                "importence": "MEDIUM",
+                "component": "ObjectStatus",
+                "criticality": "state",
+                "suggestion": "status",
+                "editComponent": "ComboBox",
+                "filterComponent": "ComboBox"
+            },
+            "description": {
+                "itemProperties": {
+                    "label": "Item Properties",
+                    "importence": "MEDIUM",
+                    "component": "Text",
+                    "editComponent": "Input"
+                },
+                "sellerName": {
+                    "label": "Seller Name",
+                    "importence": "MEDIUM",
+                    "component": "Text",
+                    "editComponent": "Input"
+                },
+                "disclaimer": {
+                    "label": "disclaimer",
+                    "importence": "MEDIUM",
+                    "component": "Text",
+                    "editComponent": "Input"
+                }
+            },
+            "itemAvailabilities": {
+                "id": {
+                    "label": "id",
+                    "importence": "HIGH",
+                    "component": "Label"
+                },
+                "actualPrice": {
+                    "label": "actualPrice",
+                    "importence": "HIGH",
+                    "component": "Label"
+                },
+                "discountPrice": {
+                    "label": "discountPrice",
+                    "importence": "HIGH",
+                    "component": "Label"
+                },
+                "value": {
+                    "label": "value",
+                    "importence": "MEDIUM",
+                    "component": "Label"
+                },
+                "unit": {
+                    "label": "unit",
+                    "importence": "MEDIUM",
+                    "component": "Label"
+                },
+                "available": {
+                    "label": "status",
+                    "importence": "MEDIUM",
+                    "component": "ObjectStatus",
+                    "criticality": "state"
+                }
+            }
+        },
+        "metadata": {
+            "id": "",
+            "categoryId": "",
+            "subCategoryId": "",
+            "name": "",
+            "status": "",
+            "state": "",
+            "itemAvailabilities": [
+                {
+                    "id": "",
+                    "itemId": "",
+                    "actualPrice": "",
+                    "discount": "",
+                    "discountPrice": "",
+                    "value": "",
+                    "unit": "",
+                    "available": "",
+                    "state": ""
+                }
+            ],
+            "description": {
+                "itemProperties": "",
+                "sellerName": "",
+                "disclaimer": ""
+            }
+        }
+    },
+    "itemCategory": {
+        "search": {
+            "label": "Search by ID",
+            "field": [
+                "_id"
+            ]
+        },
+        "filter": [
+            "name"
+        ],
+        "listPage": [
+            "id",
+            "imageLink",
+            "name"
+        ],
+        "header": {
+            "headerContent": {
+                "field": []
+            },
+            "keyInfos": {
+                "field": []
+            },
+            "title": "name",
+            "subTitle": "id",
+            "image": "imageLink",
+            "headerActions": []
+        },
+        "action": {
+            "CreateEnabled": "true",
+            "updateEnabled": "true",
+            "deleteEnabled": "true"
+        },
+        "facet": [
+            {
+                "label": "General Information",
+                "id": "GeneralInfo",
+                "type": "fieldGroup",
+                "field": [
+                    "id",
+                    "name",
+                    "description"
+                ]
+            },
+            {
+                "label": "Image",
+                "id": "image",
+                "type": "imageLinks",
+                "association": "imageLink"
+            }
+        ],
+        "property": {
+            "id": {
+                "label": "CategoryID",
+                "importence": "HIGH",
+                "component": "Label",
+                "key": "true",
+                "readOnly": "true",
+                "editComponent": "Input",
+                "filterComponent": "Input"
+            },
+            "imageLink": {
+                "label": "Image",
+                "importence": "HIGH",
+                "component": "Avatar"
+            },
+            "name": {
+                "label": "CategoryName",
+                "importence": "HIGH",
+                "component": "Text",
+                "editComponent": "Input",
+                "filterComponent": "Input"
+            },
+            "description": {
+                "label": "Description",
+                "importence": "MEDIUM",
+                "component": "Input",
+                "editComponent": "Input"
+            }
+        },
+        "metadata": {
+            "id": "",
+            "imageLink": "",
+            "name": "",
+            "description": ""
+        }
+    },
+    "itemSubcategory": {
+        "search": {
+            "label": "Search by ID or Name",
+            "field": [
+                "_id"
+            ]
+        },
+        "filter": [
+            "categoryId",
+            "name"
+        ],
+        "listPage": [
+            "id",
+            "imageLink",
+            "name",
+            "categoryId"
+        ],
+        "header": {
+            "headerContent": {
+                "field": [
+                    "categoryId"
+                ]
+            },
+            "keyInfos": {
+                "field": []
+            },
+            "title": "name",
+            "subTitle": "id",
+            "image": "imageLink",
+            "headerActions": []
+        },
+        "action": {
+            "CreateEnabled": "true",
+            "updateEnabled": "true",
+            "deleteEnabled": "true"
+        },
+        "facet": [
+            {
+                "label": "General Information",
+                "id": "GeneralInfo",
+                "type": "fieldGroup",
+                "field": [
+                    "id",
+                    "name",
+                    "description",
+                    "categoryId"
+                ]
+            },
+            {
+                "label": "Image",
+                "id": "image",
+                "type": "imageLinks",
+                "association": "imageLink"
+            }
+        ],
+        "suggestion": {
+            "category": {
+                "valueType": "standard",
+                "value": "/admin/itemCategory?key=_id&value=name"
+            }
+        },
+        "property": {
+            "id": {
+                "label": "SubCategory ID",
+                "importence": "HIGH",
+                "component": "Label",
+                "key": "true",
+                "readOnly": "true",
+                "editComponent": "Input",
+                "filterComponent": "Input"
+            },
+            "imageLink": {
+                "label": "Image",
+                "importence": "HIGH",
+                "component": "Avatar"
+            },
+            "categoryId": {
+                "label": "Category ID",
+                "importence": "MEDIUM",
+                "component": "Text",
+                "suggestion": "category",
+                "editComponent": "ComboBox",
+                "filterComponent": "MultiComboBox"
+            },
+            "name": {
+                "label": "SubCategory Name",
+                "importence": "HIGH",
+                "component": "Text",
+                "editComponent": "Input",
+                "filterComponent": "Input"
+            },
+            "description": {
+                "label": "SubCategory Description",
+                "importence": "MEDIUM",
+                "component": "Input",
+                "editComponent": "Input"
+            }
+        },
+        "metadata": {
+            "id": "",
+            "imageLink": "",
+            "name": "",
+            "categoryId": "",
+            "description": ""
+        }
+    },
+    "itemAvailability": {
+        "header": {
+            "headerContent": {
+                "field": [
+                    "available"
+                ]
+            },
+            "keyInfos": {
+                "field": []
+            },
+            "title": "value",
+            "subTitle": "unit",
+            "headerActions": []
+        },
+        "action": {
+            "updateEnabled": "true",
+            "deleteEnabled": "false",
+            "CreateEnabled": "true"
+        },
+        "suggestion": {
+            "available": {
+                "valueType": "constant",
+                "value": [
+                    {
+                        "key": "Active",
+                        "value": "Active"
+                    },
+                    {
+                        "key": "InActive",
+                        "value": "InActive"
+                    }
+                ]
+            }
+        },
+        "facet": [
+            {
+                "label": "General Information",
+                "id": "GeneralInfo",
+                "type": "fieldGroup",
+                "field": [
+                    "id",
+                    "itemId",
+                    "available"
+                ]
+            },
+            {
+                "label": "Pricing",
+                "id": "Pricing",
+                "type": "fieldGroup",
+                "field": [
+                    "actualPrice",
+                    "discount",
+                    "discountPrice",
+                    "value",
+                    "unit"
+                ]
+            }
+        ],
+        "listPage": [
+            "id",
+            "actualPrice",
+            "discount",
+            "discountPrice",
+            "value",
+            "unit",
+            "available"
+        ],
+        "property": {
+            "id": {
+                "label": "id",
+                "importence": "HIGH",
+                "key": "true",
+                "readOnly": "true",
+                "component": "Label",
+                "editComponent": "Input"
+            },
+            "itemId": {
+                "label": "Item Id",
+                "importence": "LOW",
+                "readOnly": "true",
+                "component": "Label",
+                "editComponent": "Input",
+                "parentId": "true"
+            },
+            "actualPrice": {
+                "label": "Actual Price",
+                "importence": "MEDIUM",
+                "component": "Label",
+                "editComponent": "Input"
+            },
+            "discountPrice": {
+                "label": "Discounted Price",
+                "importence": "MEDIUM",
+                "component": "Label",
+                "editComponent": "Input"
+            },
+            "discount": {
+                "label": "Total Discount",
+                "importence": "HIGH",
+                "component": "Label",
+                "editComponent": "Input"
+            },
+            "value": {
+                "label": "Quantity",
+                "importence": "HIGH",
+                "component": "Label",
+                "editComponent": "Input"
+            },
+            "unit": {
+                "label": "Unit",
+                "importence": "HIGH",
+                "component": "Label",
+                "editComponent": "Input"
+            },
+            "available": {
+                "label": "status",
+                "importence": "MEDIUM",
+                "component": "ObjectStatus",
+                "criticality": "state",
+                "suggestion": "available",
+                "editComponent": "ComboBox"
+            }
+        },
+        "metadata": {
+            "id": "",
+            "itemId": "",
+            "actualPrice": "",
+            "discount": "",
+            "discountPrice": "",
+            "value": "",
+            "unit": "",
+            "available": ""
+        }
+    },
+    "userOrder": {
+        "search": {
+            "label": "Search by ID",
+            "field": [
+                "_id"
+            ]
+        },
+        "filter": [
+            "status",
+            "orderAt",
+            "address"
+        ],
+        "listPage": [
+            "id",
+            "address",
+            "orderAt",
+            "deliverBy",
+            "totalAmount",
+            "status"
+        ],
+        "header": {
+            "headerContent": {
+                "field": []
+            },
+            "keyInfos": {
+                "field": []
+            },
+            "title": "",
+            "subTitle": "",
+            "headerActions": []
+        },
+        "action": {},
+        "facet": [],
+        "suggestion": {
+            "status": {
+                "valueType": "constant",
+                "value": [
+                    {
+                        "key": "pending",
+                        "value": "Pending"
+                    },
+                    {
+                        "key": "confirmed",
+                        "value": "Confirmed"
+                    },
+                    {
+                        "key": "completed",
+                        "value": "Completed"
+                    }
+                ]
+            }
+        },
+        "property": {
+            "id": {
+                "label": "Oreder ID",
+                "importence": "HIGH",
+                "component": "Label",
+                "key": "true",
+                "readOnly": "true",
+                "editComponent": "Input"
+            },
+            "address": {
+                "label": "Delivery Address",
+                "importence": "MEDIUM",
+                "component": "Label",
+                "readOnly": "true",
+                "editComponent": "Input",
+                "filterComponent": "Input"
+            },
+            "orderAt": {
+                "label": "Ordered At",
+                "importence": "HIGH",
+                "component": "Label",
+                "readOnly": "true",
+                "editComponent": "DateRange",
+                "filterComponent": "DateRange"
+            },
+            "totalAmount": {
+                "label": "Total Amount",
+                "importence": "HIGH",
+                "component": "Label",
+                "readOnly": "true",
+                "editComponent": "Input"
+            },
+            "deliverBy": {
+                "label": "Deliver By",
+                "importence": "HIGH",
+                "component": "Label",
+                "editComponent": "DateRange",
+                "filterComponent": "DateRange"
+            },
+            "status": {
+                "label": "Status",
+                "importence": "MEDIUM",
+                "component": "ObjectStatus",
+                "criticality": "state",
+                "suggestion": "status",
+                "editComponent": "ComboBox",
+                "filterComponent": "ComboBox"
+            }
+        },
+        "metadata": {
+            "id": "",
+            "address": "",
+            "orderAt": "",
+            "deliverBy": "",
+            "status": "",
+            "state": ""
+        }
+    }
+}
