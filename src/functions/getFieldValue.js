@@ -1,3 +1,4 @@
+import moment from 'moment';
 
 export default function getFieldValue(e) {
     const component = e.target.nodeName;
@@ -19,14 +20,40 @@ export default function getFieldValue(e) {
             }
             break;
         case "UI5-INPUT":
-            return (e.target.value);
+            const nodeMap = e.target.attributes;
+            if(!nodeMap.getNamedItem("show-suggestions")) {
+                return (e.target.value);
+            }else {
+                let value = e.target.value;
+                let returnValue = null;
+                e.target.childNodes.forEach(element => {
+                    if(value === element.text) {
+                        returnValue = element.attributes.itemid.nodeValue;
+                    }
+                });
+                if(!returnValue) {
+                    e.target.value ="";
+                }
+                return(returnValue);
+            }
+            
 
         case "UI5-DATERANGE-PICKER":
             return ({
                 "firstValue": e.target.firstDateValue,
                 "lastValue": e.target.lastDateValue
             });
+        case "UI5-DATEPICKER": 
+            if(e.target.value) {
+                return(formatDate(e.target.value));
+            }else {
+                return("");
+            }
         default:
             break;
     }
+}
+
+const formatDate = (date) => {
+    return (moment(date).format('YYYY-MM-DD[T00:00:00.000Z]'));
 }

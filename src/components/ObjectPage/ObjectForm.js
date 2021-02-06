@@ -205,6 +205,7 @@ const ObjectForm = () => {
             setEditSaveButton("Save");
         } else {
             if (isDirty) {
+                debugger;
                 let method = "";
                 LuigiClient.uxManager().showLoadingIndicator();
                 //check HTTP method type(id contains number => Edit)
@@ -240,11 +241,11 @@ const ObjectForm = () => {
                     })
                     .catch(function (response) {
                         const errorMessage = {
-                            text: response.response.data === undefined ?
+                            text: response.response === undefined ?
                                 response.message :
                                 response.response.data.message,
                             type: "error",
-                            closeAfter: 3000
+                            closeAfter: 5000
                         }
                         LuigiClient.uxManager().hideLoadingIndicator();
                         LuigiClient.uxManager().showAlert(errorMessage);
@@ -277,6 +278,7 @@ const ObjectForm = () => {
             });
     }
     const onInputChange = (e) => {
+        debugger;
         const parentID = e.target.id;
         const temp = parentID.split('.');
         if (temp.length > 1) {
@@ -512,26 +514,38 @@ const ObjectForm = () => {
             LuigiClient.linkManager().goBack();
         }
     }
-    debugger;
     if (!Object.keys(property) || !Object.keys(entity).length) {
         return (
-            <></>
+            <>
+                <main className="fd-page fd-page--transparent" style={{ width: '100%', height: '100%', margin: '0', overflow: 'hidden' }}>
+                    <header>
+                            <div class="fd-bar__left">
+                                <div class="fd-bar__element" style={{...spacing.sapUiSmallMarginBegin}}>
+                                    <button class="fd-button fd-button--transparent sap-icon--navigation-left-arrow"  onClick={onGoBack}></button>
+                                </div>
+                                <div class="fd-bar__element">
+                                    <Title level={TitleLevel.H3}>{formType}</Title>
+                                </div>
+                            </div>
+                    </header>
+                </main>
+            </>
         );
     } else
         return (
 
             <main className="fd-page fd-page--transparent" style={{ width: '100%', height: '100%', margin: '0', overflow: 'hidden' }}>
                 <header>
-                    <div class="fd-bar fd-bar--page-m_l fd-bar--header-with-subheader">
+                    {/* <div class="fd-bar fd-bar--page-m_l fd-bar--header-with-subheader" > */}
                         <div class="fd-bar__left">
-                            <div class="fd-bar__element">
-                                <button class="fd-button fd-button--transparent sap-icon--navigation-left-arrow" onClick={onGoBack}></button>
+                            <div class="fd-bar__element" style={{...spacing.sapUiSmallMarginBegin}}>
+                                <button class="fd-button fd-button--transparent sap-icon--navigation-left-arrow"  onClick={onGoBack}></button>
                             </div>
                             <div class="fd-bar__element">
                                 <Title level={TitleLevel.H3}>{formType}</Title>
                             </div>
                         </div>
-                    </div>
+                    {/* </div> */}
                 </header>
                 <div class="fd-page__content" style={{ width: '100%' }}>
                     <ObjectPage
@@ -616,15 +630,13 @@ const ObjectForm = () => {
                                 <ObjectPageSection
                                     title={facet.label === undefined ? "" : facet.label}
                                     id={facet.id === undefined ? "" : facet.id}>
-                                    <CustomFacet field={facet.field}
-                                        association={facet.association}
+                                    <CustomFacet 
+                                        facet={facet}
                                         property={property}
-                                        type={facet.type}
                                         imageUploadpopoverRef={ImageUploadpopoverRef}
                                         editStatus={EditSaveButton}
                                         entity={entity}
                                         enableBusyIndicator={enableBusyIndicator}
-                                        // setEntity={setEntity}
                                         suggestion={suggestion}
                                         onInputChange={onInputChange}
                                         onImageSave={onImageSave}

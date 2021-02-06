@@ -17,10 +17,10 @@ import CustomImageHolder from './CustomImageHolder.js';
 import CustomFieldItem from '../../CustomFieldItem.js';
 
 export default function CustomFacet(props) {
-    const fields = props.field;
+    const fields = props.facet.field;
     const editStatus = props.editStatus;
-    const association = props.association;
-    const type = props.type;
+    const association = props.facet.association;
+    const type = props.facet.type;
     const parentId = Object.keys(props.entity).length <= 0 ? "" : props.entity["id"]
     const property = association === undefined ?
         props.property :
@@ -107,11 +107,15 @@ export default function CustomFacet(props) {
                 const data = {};
                 data["property"] = property
                 data["data"] = entity
-                console.log("data", data)
                 return (
-                    <ItemList parentId={parentId}
+                    <ItemList 
+                        parentId={parentId}
                         data={entity === undefined ? [] : entity}
-                        context="itemAvailability" />
+                        context={props.facet.contextType}
+                        action={props.facet.action}
+                        isDerived={true} 
+                        property={property}
+                        listPage={props.facet.listPage}/>
                 );
             case "imageLinks":
                 return (

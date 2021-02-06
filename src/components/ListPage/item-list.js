@@ -53,7 +53,7 @@ export default function ItemList(props) {
     //load context
     useEffect(() => {
         const initListener = addInitListener((e) => {
-            if (props.context !== undefined) {
+            if (props.isDerived && props.context) {
                 setContext(props.context);
             } else {
                 setContext(LuigiClient.getContext().parentNavigationContexts === undefined ?
@@ -64,7 +64,7 @@ export default function ItemList(props) {
         );
         const updateListener = addContextUpdateListener((e) => {
             //check context is available from props 
-            if (props.context !== undefined) {
+            if (props.isDerived && props.context) {
                 setContext(props.context);
             } else {
                 setContext(LuigiClient.getContext().parentNavigationContexts === undefined ?
@@ -73,7 +73,7 @@ export default function ItemList(props) {
             }
 
             //check parentID is available from props
-            if (props.parentID !== undefined) {
+            if (props.isDerived && props.parentID) {
                 setParentId(props.parentID);
             }
         })
@@ -84,7 +84,7 @@ export default function ItemList(props) {
         if (context !== undefined && context !== "") {
             LuigiClient.uxManager().showLoadingIndicator();
 
-            if (props.data !== undefined) {
+            if (props.isDerived && props.data) {
                 setEntityData(props.data);
                 LuigiClient.uxManager().hideLoadingIndicator();
             } else {
@@ -104,24 +104,22 @@ export default function ItemList(props) {
         }
     }, [context, props.data])
     useEffect(() => {
-        if (annotation[context] !== undefined) {
-            console.log(annotation[context], "prps")
-
-            // setProperty(data.property);
-            setListPage(annotation[context].listPage);
-            setProperty(annotation[context].property);
-            // if (context === "itemDetails") {
-            //     setEntityData(itemDetailsList);
-            // } else if (context === "itemCategory") {
-            //     debugger;
-            //     setEntityData(listData);
-            // } else if (context === "itemSubcategory") {
-            //     setEntityData(itemSubCategoryList);
-            // }
-            setSearchProps(annotation[context].search);
-            setFilterProps(annotation[context].filter);
-            setSuggestion(annotation[context].suggestion);
-            setAction(annotation[context].action);
+        if(props.isDerived) {
+            setListPage(props.listPage);
+            setProperty(props.property);
+            setSearchProps(props.searchProps);
+            setFilterProps(props.filterProps);
+            setAction(props.action);
+        }
+        else {
+            if (annotation[context] !== undefined) {
+                setListPage(annotation[context].listPage);
+                setProperty(annotation[context].property);
+                setSearchProps(annotation[context].search);
+                setFilterProps(annotation[context].filter);
+                setSuggestion(annotation[context].suggestion);
+                setAction(annotation[context].action);
+            }
         }
     }, [context]);
 
@@ -142,20 +140,22 @@ export default function ItemList(props) {
         let filter = "?";
         debugger;
         Object.keys(filterValue).map(value => {
-            if (Array.isArray(filterValue[value])) {
-                filterValue[value].map(arrayValue => {
-                    filter += `&filter=${value}+${arrayValue.operator}+(${formatFilterValue(arrayValue.operend)})`;
-                });
-            } else {
-                filterValue[value].operend = formatFilterValue(filterValue[value].operend);
-                if (value === "searchBar") {
-                    searchProps.field.map(search => {
-                        filter += `&filter=${search}+eq+(${filterValue[value].operend})`;
+                if (Array.isArray(filterValue[value])) {
+                    filterValue[value].map(arrayValue => {
+                        filter += `&filter=${value}+${arrayValue.operator}+(${formatFilterValue(arrayValue.operend)})`;
                     });
                 } else {
-                    filter += `&filter=${value}+${filterValue[value].operator}+(${filterValue[value].operend})`;
+                    if(filterValue[value].operend && filterValue[value].operend !== "") {
+                        filterValue[value].operend = formatFilterValue(filterValue[value].operend);
+                        if (value === "searchBar") {
+                            searchProps.field.map(search => {
+                                filter += `&filter=${search}+eq+(${filterValue[value].operend})`;
+                            });
+                        } else {
+                            filter += `&filter=${value}+${filterValue[value].operator}+(${filterValue[value].operend})`;
+                        }
+                    }
                 }
-            }
         })
         console.log(`${process.env.REACT_APP_DOMAIN}/admin/${context}${filter}`);
         LuigiClient.uxManager().showLoadingIndicator();
@@ -210,9 +210,9 @@ export default function ItemList(props) {
     return (
         <div>
             <section className="fd-section">
-                <div className="fd-section__header">
-                    {/* <h1 className="fd-section__title">Items(2)</h1> */}
-                </div>
+                {/* <div className="fd-section__header">
+                    <h1 className="fd-section__title">Item List</h1>
+                </div> */}
                 <div className="header">
                     {
                         <CustomFilter search={searchProps} filter={filterProps}

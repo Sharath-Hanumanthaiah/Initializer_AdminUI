@@ -5,12 +5,23 @@ import {
     MultiComboBox,
     MultiComboBoxItem,
     Input,
+    FlexBox,
+    FlexBoxJustifyContent,
+    FlexBoxDirection,
+    FlexBoxWrap,
+    FlexBoxAlignItems,
     FilterItem,
-    FilterType
+    FilterType,
+    SuggestionItem
 } from '@ui5/webcomponents-react';
-import { DatePicker } from 'fundamental-react';
+import { DatePicker } from '@ui5/webcomponents-react/lib/DatePicker';
+// import { ComboboxInput } from 'fundamental-react';
+// import Select from 'react-select'
+import "@ui5/webcomponents/dist/features/InputSuggestions.js";
 import "@ui5/webcomponents/dist/DateRangePicker";
+import { spacing } from '@ui5/webcomponents-react-base';
 import axios from 'axios';
+
 
 export default function CustomFieldItem(props) {
 
@@ -31,7 +42,7 @@ export default function CustomFieldItem(props) {
     // const suggestion = props.suggestion === undefined ? [] : props.suggestion;
     const field = props.field;
     const value = props.value === undefined ? "" : props.value;
-    console.log("sugg", suggestion)
+    console.log("sugg", suggestion);
     useEffect(() => {
         if (props.suggestion !== undefined && props.suggestion.valueType === "constant") {
             setSuggestion(...suggestion, props.suggestion.value);
@@ -48,17 +59,24 @@ export default function CustomFieldItem(props) {
     switch (component) {
         case "MultiComboBox":
             return (
+                <FlexBox
+                    direction={FlexBoxDirection.Row}
+                    justifyContent={FlexBoxJustifyContent.Start}
+                    wrap={FlexBoxWrap.Wrap}
+                    alignItems={FlexBoxAlignItems.Start}
+                >
                 <FilterItem
                     label={label}
                     id={field}
                     type={FilterType.Custom}
+                    style={{maxWidth: "210px", ...spacing.sapUiSmallMarginBeginEnd}}
                 >
                     <MultiComboBox
                         allowCustomValues={true}
                         id={field}
                         value={value}
-                        onSelectionChange={props.onFilterChange
-                        }
+                        onSelectionChange={props.onFilterChange}
+                        // style={{width: "50%"}}
                     >
                         {
                             suggestion.map(suggestion => (
@@ -67,6 +85,7 @@ export default function CustomFieldItem(props) {
                         }
                     </MultiComboBox>
                 </FilterItem >
+                </FlexBox>
 
             );
         case "ComboBox":
@@ -75,20 +94,51 @@ export default function CustomFieldItem(props) {
                     label={label}
                     id={field}
                     type={FilterType.Custom}
+                    style={{maxWidth: "210px", ...spacing.sapUiSmallMarginBeginEnd}}
+                    // style={{maxWidth: "210px", padding: "19px"}}
+                    // style={{width: "62%"}}
+                    
                 >
-                    <ComboBox
-                        allowCustomValues={true}
+                    {/* <ComboBox
+                        // allowCustomValues={true}
                         id={field}
-                        onChange={props.onFilterChange
-                        }
+                        // onChange={props.onFilterChange
+                        // }
                         value={value}
                     >
                         {
-                            suggestion.map(suggestion => (
-                                <ComboBoxItem id={suggestion.key} text={suggestion.value} />
-                            ))
+                            // suggestion.map(suggestion => (
+                            //     <ComboBoxItem id={suggestion.key} text={suggestion.value} />
+                            // ))
+                            <ComboBoxItem text="test" />
                         }
-                    </ComboBox>
+                    </ComboBox> */}
+                    <Input
+                        id={field}
+                        showSuggestions
+                    >
+                        {
+                            suggestion.map(suggestion => (
+                                <SuggestionItem text={suggestion.value} itemID={suggestion.key} />
+                                ))
+                        }
+                    </Input>
+                    {/* <Select  options={ suggestion.map(x => {
+                        return({value: x.key, label: x.value});
+                    })} /> */}
+                    {/* <ComboboxInput
+                        id={field}
+                        selectionType="manual"
+                        onClick = {(e) => {debugger}}
+                        onSelectionChange={props.onFilterChange}
+                        // onClick={props.onFilterChange}
+                        options={[{key:"a",text:"aa"}]}
+                    //     options={ suggestion.map(x => {
+                    //     return({key: x.key, text: x.value});
+                    // })}
+                    > */}
+
+                    {/* </ComboboxInput> */}
                 </FilterItem>
             );
         case "Input":
@@ -97,11 +147,15 @@ export default function CustomFieldItem(props) {
                     label={label}
                     key={field}
                     type={FilterType.Custom}
+                    style={{maxWidth: "210px", ...spacing.sapUiSmallMarginBeginEnd, overflow:"hidden"}}
                 >
                     <Input id={field}
                         showSuggestions={false}
                         value={value}
                         onChange={props.onFilterChange}
+                        nodeName="UI5-COMBOBOX"
+                        // style={{maxWidth: "180px", padding: "20px"}}
+                        style={{width: "100%"}}
                     >
                     </Input>
                 </FilterItem>
@@ -118,6 +172,7 @@ export default function CustomFieldItem(props) {
                     label={label}
                     key={field}
                     type={FilterType.Custom}
+                    style={{maxWidth: "210px", ...spacing.sapUiSmallMarginBeginEnd}}
                 >
                     <ui5-daterange-picker
                         id={field}
@@ -126,6 +181,21 @@ export default function CustomFieldItem(props) {
                     >
                     </ui5-daterange-picker>
                     {/* <DatePicker enableRangeSelection /> */}
+                </FilterItem>
+            );
+        case "DatePicker":
+            return(
+                <FilterItem
+                    label={label}
+                    key={field}
+                    type={FilterType.Custom}
+                    style={{maxWidth: "210px", ...spacing.sapUiSmallMarginBeginEnd}}
+                >
+                    <DatePicker
+                        id={field}
+                        onChange={props.onFilterChange}
+                        primaryCalendarType="Gregorian"
+                    />
                 </FilterItem>
             );
         default:

@@ -26,19 +26,51 @@ export default function getFilterValuegetFilterValue(e) {
             }
             break;
         case "UI5-INPUT":
-            return ({
-                "operend": e.target.value,
-                "operator": "eq"
-            });
+            const nodeMap = e.target.attributes;
+            if(!nodeMap.getNamedItem("show-suggestions")) {
+                return ({
+                    "operend": e.target.value,
+                    "operator": "eq"
+                });
+            }else {
+                let value = e.target.value;
+                let returnValue = {};
+                e.target.childNodes.forEach(element => {
+                    if(value === element.text) {
+                        returnValue ={
+                            "operend": element.attributes.itemid.nodeValue,
+                            "operator": "eq"
+                        };
+                    }
+                });
+                if(Object.keys(returnValue).length <= 0) {
+                    e.target.value ="";
+                }
+                return(returnValue);
+            }
+            break;
 
         case "UI5-DATERANGE-PICKER":
-            return ([{
-                "operend": formatDate(e.target.firstDateValue),
-                "operator": "ge"
-            }, {
-                "operend": formatDate(e.target.lastDateValue),
-                "operator": "le"
-            }]);
+            if(e.target.value === ""){
+                return({});
+            }else {
+                return ([{
+                    "operend": formatDate(e.target.firstDateValue),
+                    "operator": "ge"
+                }, {
+                    "operend": formatDate(e.target.lastDateValue),
+                    "operator": "le"
+                }]);
+            }
+        case "UI5-DATEPICKER": 
+        if (e.target.value) {
+            return ({
+                "operend": formatDate(e.target.value),
+                "operator": "eq"
+            });
+        } else {
+            return ({});
+        }
         default:
             break;
     }

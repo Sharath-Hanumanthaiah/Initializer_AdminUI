@@ -76,7 +76,18 @@
                 "id": "availablity",
                 "type": "lineItem",
                 "association": "itemAvailabilities",
-                "contextType": "availability"
+                "contextType": "itemAvailability",
+                "listPage": [
+                    "id",
+                    "actualPrice",
+                    "discountPrice",
+                    "value",
+                    "unit",
+                    "available"
+                ],
+                "action": {
+                    "CreateEnabled": "true"
+                }
             },
             {
                 "label": "Image",
@@ -572,31 +583,90 @@
             ]
         },
         "filter": [
-            "status",
+            "overallStatus",
             "orderAt",
-            "address"
+            "deliveredBy"
         ],
         "listPage": [
             "id",
             "address",
             "orderAt",
-            "deliverBy",
+            "deliveredBy",
             "totalAmount",
-            "status"
+            "overallStatus"
         ],
         "header": {
             "headerContent": {
-                "field": []
+                "field": [
+                    "address",
+                    "deliveredBy",
+                    "totalAmount"
+                ]
             },
             "keyInfos": {
                 "field": []
             },
-            "title": "",
-            "subTitle": "",
+            "title": "customerName",
+            "subTitle": "id",
             "headerActions": []
         },
-        "action": {},
-        "facet": [],
+        "action": {
+            "updateEnabled":"true"
+        },
+        "facet": [
+            {
+                "label": "General Information",
+                "id": "1-GeneralInfo",
+                "type": "fieldGroup",
+                "field": [
+                    "id",
+                    "orderAt",
+                    "deliveredBy",
+                    "coupenCode",
+                    "coupenDiscount",
+                    "deliveryCharge",
+                    "totalAmount"
+                ]
+            },
+            {
+                "label": "Order Status",
+                "id": "2-orderStatus",
+                "type": "fieldGroup",
+                "association": "status",
+                "field": [
+                    "confirmed",
+                    "delivered"
+                ]
+            },
+            {
+                "label": "Customer Information",
+                "id": "3-CustomerInfo",
+                "type": "fieldGroup",
+                "field": [
+                    "customerName",
+                    "address",
+                    "landmark",
+                    "pincode",
+                    "phoneNumber"
+                ]
+            },
+            {
+                "label": "Item Information",
+                "id": "4-items",
+                "type": "lineItem",
+                "association": "items",
+                "contextType": "itemDetails",
+                "listPage": [
+                    "id",
+                    "name",
+                    "availability",
+                    "quantity",
+                    "amount"
+                ],
+                "action": {
+                }
+            }
+        ],
         "suggestion": {
             "status": {
                 "valueType": "constant",
@@ -614,11 +684,24 @@
                         "value": "Completed"
                     }
                 ]
+            },
+            "confirmation": {
+                "valueType": "constant",
+                "value": [
+                    {
+                        "key": true,
+                        "value": "True"
+                    },
+                    {
+                        "key": false,
+                        "value": "False"
+                    }
+                ]
             }
         },
         "property": {
             "id": {
-                "label": "Oreder ID",
+                "label": "Order ID",
                 "importence": "HIGH",
                 "component": "Label",
                 "key": "true",
@@ -633,13 +716,51 @@
                 "editComponent": "Input",
                 "filterComponent": "Input"
             },
+            "pincode": {
+                "label": "PinCode",
+                "importence": "MEDIUM",
+                "component": "Label",
+                "readOnly": "true",
+                "editComponent": "Input",
+                "filterComponent": "Input"
+            },
+            "coupenCode": {
+                "label": "Coupen Code",
+                "importence": "MEDIUM",
+                "component": "Label",
+                "readOnly": "true",
+                "editComponent": "Input",
+                "filterComponent": "Input"
+            },
+            "landmark": {
+                "label": "Landmark",
+                "importence": "MEDIUM",
+                "component": "Label",
+                "readOnly": "true",
+                "editComponent": "Input",
+                "filterComponent": "Input"
+            },
             "orderAt": {
-                "label": "Ordered At",
+                "label": "Ordered On",
                 "importence": "HIGH",
                 "component": "Label",
                 "readOnly": "true",
                 "editComponent": "DateRange",
                 "filterComponent": "DateRange"
+            },
+            "coupenDiscount": {
+                "label": "Coupen Discount",
+                "importence": "HIGH",
+                "component": "Label",
+                "readOnly": "true",
+                "editComponent": "Input"
+            },
+            "deliveryCharge": {
+                "label": "Delivery Charge",
+                "importence": "HIGH",
+                "component": "Label",
+                "readOnly": "true",
+                "editComponent": "Input"
             },
             "totalAmount": {
                 "label": "Total Amount",
@@ -648,14 +769,14 @@
                 "readOnly": "true",
                 "editComponent": "Input"
             },
-            "deliverBy": {
-                "label": "Deliver By",
+            "deliveredBy": {
+                "label": "Deliver it By",
                 "importence": "HIGH",
                 "component": "Label",
-                "editComponent": "DateRange",
+                "editComponent": "DatePicker",
                 "filterComponent": "DateRange"
             },
-            "status": {
+            "overallStatus": {
                 "label": "Status",
                 "importence": "MEDIUM",
                 "component": "ObjectStatus",
@@ -663,15 +784,101 @@
                 "suggestion": "status",
                 "editComponent": "ComboBox",
                 "filterComponent": "ComboBox"
+            },
+            "status": {
+                "confirmed" : {
+                    "label": "Confirmed",
+                    "importence": "HIGH",
+                    "component": "Label",
+                    "suggestion": "confirmation",
+                    "editComponent": "ComboBox"
+                },
+                "delivered" : {
+                    "label": "Delivered",
+                    "importence": "HIGH",
+                    "component": "Label",
+                    "suggestion": "confirmation",
+                    "editComponent": "ComboBox"
+                }
+            },
+            "customerName": {
+                "label": "Customer Name",
+                "importence": "MEDIUM",
+                "component": "Label",
+                "readOnly": "true",
+                "editComponent": "Input",
+                "filterComponent": "Input"
+            },
+            "phoneNumber": {
+                "label": "Phone Number",
+                "importence": "MEDIUM",
+                "component": "Label",
+                "readOnly": "true",
+                "editComponent": "Input",
+                "filterComponent": "Input"
+            },
+            "items": {
+                "id": {
+                    "label": "Item ID",
+                    "importence": "HIGH",
+                    "component": "Label",
+                    "key": "true",
+                    "readOnly": "true",
+                    "editComponent": "Input"
+                },
+                "name": {
+                    "label": "Item Name",
+                    "importence": "HIGH",
+                    "component": "Label",
+                    "readOnly": "true",
+                    "editComponent": "Input",
+                    "filterComponent": "Input"
+                },
+                "amount": {
+                    "label": "Amount",
+                    "importence": "MEDIUM",
+                    "component": "Label",
+                    "readOnly": "true",
+                    "editComponent": "Input"
+                },
+                "quantity": {
+                    "label": "Quantity",
+                    "importence": "HIGH",
+                    "component": "Label",
+                    "readOnly": "true",
+                    "editComponent": "Input"
+                },
+                "availability": {
+                    "label": "Availability",
+                    "importence": "MEDIUM",
+                    "component": "Label",
+                    "readOnly": "true",
+                    "editComponent": "Input"
+                }
             }
         },
         "metadata": {
             "id": "",
-            "address": "",
+            "addressId": "",
             "orderAt": "",
-            "deliverBy": "",
-            "status": "",
-            "state": ""
+            "deliveredBy": "",
+            "coupenCode": "",
+            "coupenDiscount": "",
+            "deliveryCharge": "",
+            "totalAmount": "",
+            "status": {
+                "confirmed":"",
+                "delivered":""
+            },
+            "orderList": [
+                {
+                    "userId": "",
+                    "itemId": "",
+                    "availabilityId": "",
+                    "amount": "",
+                    "quantity": ""
+                }
+            ]
         }
     }
 }
