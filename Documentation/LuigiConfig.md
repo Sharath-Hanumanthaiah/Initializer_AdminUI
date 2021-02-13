@@ -1,3 +1,3 @@
 # Luigi config doc
 
-navigationContext -> used in key in annotation reference
+  * navigationContext -> used in key in annotation reference  
