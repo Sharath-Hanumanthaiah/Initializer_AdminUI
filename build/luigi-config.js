@@ -80,8 +80,18 @@ Luigi.setConfig({
             viewUrl: '/sampleapp.html#/object-form'
           },
           {
+            pathSegment: 'userOrder',
+            label: 'User Order',
+            icon: 'my-sales-order',
+            navigationContext: 'userOrder',
+            loadingIndicator: {
+              enabled: false
+            },
+            viewUrl: '/sampleapp.html#/item-list'
+          },
+          {
             pathSegment: 'configure-order',
-            label: 'Orders',
+            label: 'Home page',
             category: {
               label: 'Configure',
               icon: 'provision',
@@ -91,11 +101,15 @@ Luigi.setConfig({
               enabled: false
             },
             viewUrl: '/sampleapp.html#/item-list'
-          }, {
-            pathSegment: 'userOrder',
-            label: 'User Order',
-            icon: 'my-sales-order',
-            navigationContext: 'userOrder',
+          }, 
+          {
+            pathSegment: 'configure-order',
+            label: 'Orders',
+            category: {
+              label: 'Configure',
+              icon: 'provision',
+              collapsible: true
+            },
             loadingIndicator: {
               enabled: false
             },

@@ -195,7 +195,6 @@ export default function ItemList(props) {
     }
     const onCreate = (e) => {
         let link = "";
-        debugger;
         // if (props.parentId != undefined) {
         //     link = LuigiClient.linkManager().withParams({ parentId: props.parentId });
         // }
