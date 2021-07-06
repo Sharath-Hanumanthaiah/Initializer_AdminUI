@@ -20,7 +20,8 @@ import { DatePicker } from '@ui5/webcomponents-react/lib/DatePicker';
 import "@ui5/webcomponents/dist/features/InputSuggestions.js";
 import "@ui5/webcomponents/dist/DateRangePicker";
 import { spacing } from '@ui5/webcomponents-react-base';
-import axios from 'axios';
+// import axios from 'axios';
+import axios from '../api/axios';
 
 
 export default function CustomFieldItem(props) {
@@ -47,14 +48,14 @@ export default function CustomFieldItem(props) {
         if (props.suggestion !== undefined && props.suggestion.valueType === "constant") {
             setSuggestion(...suggestion, props.suggestion.value);
         } else if (props.suggestion !== undefined && props.suggestion.valueType === "standard") {
-            axios.get(`${process.env.REACT_APP_DOMAIN}${props.suggestion.value}`).then((data) => {
+            axios.get(`${props.suggestion.value}`).then((data) => {
                 setSuggestion(...suggestion, data.data);
             })
         }
         const dateRange = document.getElementById(field);
         if (dateRange) {
             dateRange.addEventListener("change", props.onFilterChange);
-        }
+        }   
     }, [])
     switch (component) {
         case "MultiComboBox":

@@ -44,7 +44,8 @@ import annotation from '../../annotation/annotation.json';
 import useConstructor from '../CustomHooks/useConstructor.js';
 
 import getFieldValue from '../../functions/getFieldValue.js'
-import axios from 'axios';
+// import axios from 'axios';
+import axios from '../../api/axios';
 import "@ui5/webcomponents-icons/dist/icons/decline.js";
 
 // import worker from '../../Worker/UploadFile';
@@ -91,7 +92,7 @@ const ObjectForm = () => {
         // let dataset = "";
         if (pathValue !== "" && pathValue != "id" && formType !== "" && previousOperation !== "Create") {
             console.log(`${process.env.REACT_APP_DOMAIN}/admin/${formType}/${pathValue}`);
-            axios.get(`${process.env.REACT_APP_DOMAIN}/admin/${formType}/${pathValue}`)
+            axios.get(`${formType}/${pathValue}`)
                 .then((data) => {
                     setEntity(data.data);
                     // LuigiClient.uxManager().hideLoadingIndicator();
@@ -227,9 +228,8 @@ const ObjectForm = () => {
                 console.log(`${process.env.REACT_APP_DOMAIN}/admin/${formType}`);
                 axios({
                     method: method,
-                    url: `${process.env.REACT_APP_DOMAIN}/admin/${formType}`,
-                    data: bodyFormData,
-                    headers: { 'Content-Type': 'multipart/form-data' }
+                    url: `${formType}`,
+                    data: formData,
                 })
                     .then(function (response) {
                         setEntity(response.data);
@@ -250,7 +250,6 @@ const ObjectForm = () => {
                         LuigiClient.uxManager().hideLoadingIndicator();
                         LuigiClient.uxManager().showAlert(errorMessage);
                     });
-
             }
             setEditSaveButton("Edit");
         }
@@ -259,7 +258,7 @@ const ObjectForm = () => {
     const onDeleteAction = () => {
         axios({
             method: 'delete',
-            url: `${process.env.REACT_APP_DOMAIN}/admin/${formType}/${pathValue}`
+            url: `${formType}/${pathValue}`
         })
             .then(function (response) {
                 LuigiClient.uxManager().hideLoadingIndicator();
@@ -377,9 +376,9 @@ const ObjectForm = () => {
             form.append("images", imageToDelete);
             axios({
                 method: 'put',
-                url: `${process.env.REACT_APP_DOMAIN}/admin/imageUpload`,
+                url: `/imageUpload`,
                 data: form,
-                headers: { 'Content-Type': 'multipart/form-data' }
+                headers: { 'Content-Type': 'multipart/form-data', 'X-Tenant': 'com.initializers.GrocceryStore' }
             }).then((response) => {
                 debugger;
             }).catch((response) => {

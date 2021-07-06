@@ -10,6 +10,7 @@ import ListPage from './components/ListPage/ListPage.js';
 import { addInitListener } from '@luigi-project/client';
 import ObjectForm, { } from './components/ObjectPage/ObjectForm'
 import './index.css';
+import axios from 'axios';
 
 class App extends Component {
   constructor(props) {

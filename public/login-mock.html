@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Luigi Mock Identity Provider</title>
+    <link rel="stylesheet" href="../../fundamental-styles/fundamental-styles.css" />
+    <link rel="stylesheet" type="text/css" href="../../styles.css" />
+    <style type="text/css">
+      body {
+        background-color: #f7f7f7;
+      }
+
+      h1 {
+        text-align: center;
+        font-weight: 400;
+      }
+
+      .fd-input {
+        display: block;
+        margin: auto;
+        width: 200px;
+      }
+
+      .fd-button {
+        display: block;
+        margin: auto;
+      }
+
+      .login-form {
+        background-color: #ffffff;
+        box-shadow: 0 5px 20px 0 rgba(50, 54, 58, 0.08);
+        border-radius: 4px;
+        border: none;
+        width: 50%;
+        margin: auto;
+        margin-top: 50px;
+        min-width: 270px;
+        padding: 15px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="login-form">
+      <h1>Login to Luigi sample app</h1>
+      <form>
+        <input
+          class="fd-input"
+          type="text"
+          placeholder="Username"
+          value="LuigiUsername"
+          autocomplete="username"
+        />
+        <br />
+        <input
+          class="fd-input"
+          placeholder="Password"
+          type="password"
+          value="LuigiPassword"
+          autocomplete="current-password"
+        />
+        <br />
+        <button class="fd-button">Login</button>
+      </form>
+    </div>
+    <script>
+      /**
+       * NOTE: this is a mock implementation for local development. DO NOT USE IT IN PRODUCTION!
+       */
+
+      window.onload = function() {
+        const expiresIn = 28800;
+        let redirectUrl = decodeURIComponent(
+          window.location.href.match(/redirect_uri=(.*?)(&|$)/)[1]
+        );
+        let state = decodeURIComponent(window.location.href.match(/state=(.*?)(&|$)/)[1]);
+
+        let goTo =
+          redirectUrl +
+          '#expires_in=' +
+          expiresIn +
+          '&state=' +
+          state +
+          '&access_token=thisisanaccesstokenthatisnotreallyneeded& \
+      id_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9. \
+      eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAiLCJzdWIiOiJtYXNrb3Bhd \
+      G9sIiwiZXhwIjoxNjQzNzY0OTIwLCJhenAiOiJtYXNrb3BhdG9sIiwibm9uY2 \
+      UiOiJidE5rWVZzc1FldVlWNmEyR1RVZm1wWVFFelBRN3c1ZENCbU54SG54Iiw \
+      iZW1haWwiOiJsdWlnaXVzZXJAa3ltYS5jeCIsIm5hbWUiOiJMdWlnaSBVc2Vy \
+      In0.YUBE3tufmmNIJHwzKRXlImteuh_qDeuwGjkzN3Z0erg& \
+      token_type=bearer';
+
+        let loginButton = document.getElementsByClassName('fd-button');
+
+        loginButton[0].addEventListener('click', function(ev) {
+          ev.preventDefault();
+          window.location = removeIndent(goTo);
+        });
+
+        function removeIndent(goToString) {
+          return goToString.replace(/\s\s+/g, '');
+        }
+      };
+    </script>
+  </body>
+</html>

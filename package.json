@@ -2,6 +2,7 @@
   "name": "luigi-example-react",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:8080",
   "dependencies": {
     "@babel/core": "7.6.0",
     "@luigi-project/client": "^1.3.1",

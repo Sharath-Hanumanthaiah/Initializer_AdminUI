@@ -1,5 +1,3 @@
-// import oAuth2ImplicitGrant from '@luigi-project/plugin-auth-oauth2';
-
 Luigi.setConfig({
   navigation: {
     viewGroupSettings: {
@@ -91,7 +89,22 @@ Luigi.setConfig({
               enabled: false
             },
             viewUrl: '/sampleapp.html#/item-list'
-          }, {
+          },
+          {
+            pathSegment: 'homePage',
+            label: 'Home page',
+            category: {
+              label: 'Configure',
+              icon: 'provision',
+              collapsible: true
+            },
+            navigationContext: 'homePage',
+            loadingIndicator: {
+              enabled: false
+            },
+            viewUrl: '/sampleapp.html#/item-list'
+          },
+            {
             pathSegment: 'userOrder',
             label: 'User Order',
             icon: 'my-sales-order',
@@ -113,7 +126,7 @@ Luigi.setConfig({
 //     use: 'oAuth2ImplicitGrant',
 //     myOAuth2: {
 //         idpProvider: oAuth2ImplicitGrant,
-//         authorizeUrl: '/auth/idpmock/implicit.html',
+//         authorizeUrl: `/login-mock.html`,
 //         logoutUrl: '/auth/idpmock/logout.html',
 //         post_logout_redirect_uri: '/auth/logout.html',
 //         authorizeMethod: 'GET',

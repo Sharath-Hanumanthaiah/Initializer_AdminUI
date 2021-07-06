@@ -15,7 +15,8 @@ import itemDetailsList from '../../itemDetailsList.json';
 import itemCategoryList from '../../itemCategoryList.json';
 import itemSubCategoryList from '../../itemSubcategoryList.json';
 import annotation from '../../annotation/annotation.json';
-import axios from 'axios';
+// import axios from 'axios';
+import Axios from '../../api/axios';
 // import data from '../../item-details.json';
 export default function ItemList(props) {
 
@@ -71,7 +72,6 @@ export default function ItemList(props) {
                     "" :
                     LuigiClient.getContext().parentNavigationContexts[0]);
             }
-
             //check parentID is available from props
             if (props.isDerived && props.parentID) {
                 setParentId(props.parentID);
@@ -89,7 +89,7 @@ export default function ItemList(props) {
                 LuigiClient.uxManager().hideLoadingIndicator();
             } else {
                 // thavaredailyapi-env.eba-fmgp2w3d.ap-south-1.elasticbeanstalk.com
-                axios.get(`${process.env.REACT_APP_DOMAIN}/admin/${context}`)
+                Axios.get(context)
                     .then((data) => {
                         setEntityData(data.data);
                         LuigiClient.uxManager().hideLoadingIndicator();
@@ -132,6 +132,7 @@ export default function ItemList(props) {
         } else {
             link = LuigiClient.linkManager().withParams({ type: LuigiClient.getContext().parentNavigationContexts[0], action: "Read" });
         }
+        console.log(data, entityData);
         link.navigate(`/admin-home/objectPage/${e.detail.row.id}`);
     }
 
@@ -160,9 +161,9 @@ export default function ItemList(props) {
         console.log(`${process.env.REACT_APP_DOMAIN}/admin/${context}${filter}`);
         LuigiClient.uxManager().showLoadingIndicator();
         // thavaredailyapi-env.eba-fmgp2w3d.ap-south-1.elasticbeanstalk.com
-        axios.get(`${process.env.REACT_APP_DOMAIN}/admin/${context}${filter}`)
+        Axios.get(`${context}${filter}`)
             .then((data) => {
-                setEntityData(data.data);
+                setEntityData(data.data); 
                 LuigiClient.uxManager().hideLoadingIndicator();
                 // category = data.data;
                 console.log("filter", filterValue);

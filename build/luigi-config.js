@@ -90,6 +90,16 @@ Luigi.setConfig({
             viewUrl: '/sampleapp.html#/item-list'
           },
           {
+            pathSegment: 'homePage',
+            label: 'Home Page',
+            icon: 'my-sales-order',
+            navigationContext: 'homePage',
+            loadingIndicator: {
+              enabled: false
+            },
+            viewUrl: '/sampleapp.html#/item-list'
+          },
+          {
             pathSegment: 'configure-order',
             label: 'Home page',
             category: {
@@ -97,6 +107,7 @@ Luigi.setConfig({
               icon: 'provision',
               collapsible: true
             },
+            navigationContext: 'homePage',
             loadingIndicator: {
               enabled: false
             },

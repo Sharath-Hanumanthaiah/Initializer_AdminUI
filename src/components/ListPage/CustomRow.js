@@ -16,7 +16,7 @@ export default function CustomRow(props) {
         <>
             {
                 rows.map(row => (
-                    <TableRow id={row[props.columnName[0]]}>
+                    <TableRow id={row['id']}>
                         {
                             props.columnName.map(column => (
                                 <TableCell id={"id"}>

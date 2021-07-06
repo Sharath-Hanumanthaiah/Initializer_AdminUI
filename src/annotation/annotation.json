@@ -13,7 +13,6 @@
             "name"
         ],
         "listPage": [
-            "id",
             "imageLinks",
             "name",
             "categoryId",
@@ -32,7 +31,7 @@
                 "field": []
             },
             "title": "name",
-            "subTitle": "id",
+            "subTitle": "status",
             "image": "defaultImage",
             "headerActions": [
                 {
@@ -53,7 +52,6 @@
                 "id": "GeneralInfo",
                 "type": "fieldGroup",
                 "field": [
-                    "id",
                     "name",
                     "categoryId",
                     "subCategoryId",
@@ -78,7 +76,6 @@
                 "association": "itemAvailabilities",
                 "contextType": "itemAvailability",
                 "listPage": [
-                    "id",
                     "actualPrice",
                     "discountPrice",
                     "value",
@@ -99,11 +96,11 @@
         "suggestion": {
             "category": {
                 "valueType": "standard",
-                "value": "/admin/itemCategory?key=_id&value=name"
+                "value": "/itemCategory?key=_id&value=name"
             },
             "subCategory": {
                 "valueType": "standard",
-                "value": "/admin/itemSubcategory?key=_id&value=name"
+                "value": "/itemSubcategory?key=_id&value=name"
             },
             "status": {
                 "valueType": "constant",
@@ -223,16 +220,16 @@
             }
         },
         "metadata": {
-            "id": "",
-            "categoryId": "",
-            "subCategoryId": "",
+            "id": null,
+            "categoryId": null,
+            "subCategoryId": null,
             "name": "",
             "status": "",
             "state": "",
             "itemAvailabilities": [
                 {
-                    "id": "",
-                    "itemId": "",
+                    "id": null,
+                    "itemId": null,
                     "actualPrice": "",
                     "discount": "",
                     "discountPrice": "",
@@ -260,9 +257,9 @@
             "name"
         ],
         "listPage": [
-            "id",
             "imageLink",
-            "name"
+            "name",
+            "description"
         ],
         "header": {
             "headerContent": {
@@ -272,7 +269,6 @@
                 "field": []
             },
             "title": "name",
-            "subTitle": "id",
             "image": "imageLink",
             "headerActions": []
         },
@@ -287,7 +283,6 @@
                 "id": "GeneralInfo",
                 "type": "fieldGroup",
                 "field": [
-                    "id",
                     "name",
                     "description"
                 ]
@@ -329,7 +324,7 @@
             }
         },
         "metadata": {
-            "id": "",
+            "id": null,
             "imageLink": "",
             "name": "",
             "description": ""
@@ -347,7 +342,6 @@
             "name"
         ],
         "listPage": [
-            "id",
             "imageLink",
             "name",
             "categoryId"
@@ -362,7 +356,7 @@
                 "field": []
             },
             "title": "name",
-            "subTitle": "id",
+            "subTitle": "description",
             "image": "imageLink",
             "headerActions": []
         },
@@ -377,7 +371,6 @@
                 "id": "GeneralInfo",
                 "type": "fieldGroup",
                 "field": [
-                    "id",
                     "name",
                     "description",
                     "categoryId"
@@ -393,7 +386,7 @@
         "suggestion": {
             "category": {
                 "valueType": "standard",
-                "value": "/admin/itemCategory?key=_id&value=name"
+                "value": "/itemCategory?key=_id&value=name"
             }
         },
         "property": {
@@ -434,10 +427,10 @@
             }
         },
         "metadata": {
-            "id": "",
+            "id": null,
             "imageLink": "",
             "name": "",
-            "categoryId": "",
+            "categoryId": null,
             "description": ""
         }
     },
@@ -481,7 +474,6 @@
                 "id": "GeneralInfo",
                 "type": "fieldGroup",
                 "field": [
-                    "id",
                     "itemId",
                     "available"
                 ]
@@ -500,7 +492,6 @@
             }
         ],
         "listPage": [
-            "id",
             "actualPrice",
             "discount",
             "discountPrice",
@@ -565,8 +556,8 @@
             }
         },
         "metadata": {
-            "id": "",
-            "itemId": "",
+            "id": null,
+            "itemId": null,
             "actualPrice": "",
             "discount": "",
             "discountPrice": "",
@@ -588,7 +579,6 @@
             "deliveredBy"
         ],
         "listPage": [
-            "id",
             "address",
             "orderAt",
             "deliveredBy",
@@ -619,7 +609,6 @@
                 "id": "1-GeneralInfo",
                 "type": "fieldGroup",
                 "field": [
-                    "id",
                     "orderAt",
                     "deliveredBy",
                     "coupenCode",
@@ -657,7 +646,6 @@
                 "association": "items",
                 "contextType": "itemDetails",
                 "listPage": [
-                    "id",
                     "name",
                     "availability",
                     "quantity",
@@ -858,8 +846,8 @@
             }
         },
         "metadata": {
-            "id": "",
-            "addressId": "",
+            "id": null,
+            "addressId": null,
             "orderAt": "",
             "deliveredBy": "",
             "coupenCode": "",
@@ -872,13 +860,87 @@
             },
             "orderList": [
                 {
-                    "userId": "",
-                    "itemId": "",
-                    "availabilityId": "",
+                    "userId": null,
+                    "itemId": null,
+                    "availabilityId": null,
                     "amount": "",
                     "quantity": ""
                 }
             ]
+        }
+    },
+    "homePage": {
+        "search": {
+            "label": "Search by ID",
+            "field": [
+                "_id"
+            ]
+        },
+        "filter": [
+            "name"
+        ],
+        "listPage": [
+            "widget",
+            "name"
+        ],
+        "header": {
+            "headerContent": {
+                "field": [
+                    "name"
+                ]
+            },
+            "keyInfos": {
+                "field": []
+            },
+            "title": "name",
+            "subTitle": "id",
+            "headerActions": []
+        },
+        "action": {
+            "updateEnabled":"true"
+        },
+        "facet": [
+            {
+                "label": "General Information",
+                "id": "1-GeneralInfo",
+                "type": "fieldGroup",
+                "field": [
+                    "name"
+                ]
+            }
+        ],
+        "suggestion": {
+        },
+        "property": {
+            "id": {
+                "label": "ID",
+                "importence": "HIGH",
+                "component": "Label",
+                "key": "true",
+                "readOnly": "true",
+                "editComponent": "Input"
+            },
+            "name": {
+                "label": "Name",
+                "importence": "MEDIUM",
+                "component": "Label",
+                "readOnly": "true",
+                "editComponent": "Input",
+                "filterComponent": "Input"
+            },
+            "widget": {
+                "label": "widget",
+                "importence": "MEDIUM",
+                "component": "Label",
+                "readOnly": "true",
+                "editComponent": "Input",
+                "filterComponent": "Input"
+            }
+        },
+        "metadata": {
+            "id": null,
+            "name": "",
+            "widget": ""
         }
     }
 }
