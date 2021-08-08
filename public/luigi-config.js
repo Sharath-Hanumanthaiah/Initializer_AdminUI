@@ -104,6 +104,20 @@ Luigi.setConfig({
             },
             viewUrl: '/sampleapp.html#/item-list'
           },
+          {
+            pathSegment: 'adminPayementGatewayKey',
+            label: 'Payment',
+            category: {
+              label: 'Configure',
+              icon: 'provision',
+              collapsible: true
+            },
+            navigationContext: 'adminPayementGatewayKey',
+            loadingIndicator: {
+              enabled: false
+            },
+            viewUrl: '/sampleapp.html#/item-list'
+          },
             {
             pathSegment: 'userOrder',
             label: 'User Order',

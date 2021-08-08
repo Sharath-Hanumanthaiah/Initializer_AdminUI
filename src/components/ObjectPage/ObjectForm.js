@@ -378,7 +378,7 @@ const ObjectForm = () => {
                 method: 'put',
                 url: `/imageUpload`,
                 data: form,
-                headers: { 'Content-Type': 'multipart/form-data', 'X-Tenant': 'com.initializers.GrocceryStore' }
+                headers: { 'Content-Type': 'multipart/form-data', 'X-Tenant': 'com.initializers.groccerystore1kavf' }
             }).then((response) => {
                 debugger;
             }).catch((response) => {

@@ -880,8 +880,9 @@
             "name"
         ],
         "listPage": [
+            "name",
             "widget",
-            "name"
+            "itemType"
         ],
         "header": {
             "headerContent": {
@@ -897,7 +898,9 @@
             "headerActions": []
         },
         "action": {
-            "updateEnabled":"true"
+            "updateEnabled": "true",
+            "deleteEnabled": "false",
+            "CreateEnabled": "true"
         },
         "facet": [
             {
@@ -905,11 +908,48 @@
                 "id": "1-GeneralInfo",
                 "type": "fieldGroup",
                 "field": [
-                    "name"
+                    "name",
+                    "widget",
+                    "itemType",
+                    "typeId"
                 ]
             }
         ],
         "suggestion": {
+            "itemType": {
+                "valueType": "constant",
+                "value": [
+                    {
+                        "key": "ItemCategory",
+                        "value": "Category"
+                    },
+                    {
+                        "key": "ItemSubCategory",
+                        "value": "Sub-Category"
+                    },
+                    {
+                        "key": "ItemDetails",
+                        "value": "Item Details"
+                    }
+                ]
+            },
+            "widget": {
+                "valueType": "constant",
+                "value": [
+                    {
+                        "key": "SingleCard",
+                        "value": "Scrollable Single Card"
+                    },
+                    {
+                        "key": "ItemCard",
+                        "value": "Scrollable Items Card"
+                    },
+                    {
+                        "key": "MultiItemCard",
+                        "value": "Multiple Items Card"
+                    }
+                ]
+            }
         },
         "property": {
             "id": {
@@ -923,16 +963,30 @@
             "name": {
                 "label": "Name",
                 "importence": "MEDIUM",
-                "component": "Label",
-                "readOnly": "true",
+                "component": "Input",
                 "editComponent": "Input",
                 "filterComponent": "Input"
             },
             "widget": {
                 "label": "widget",
                 "importence": "MEDIUM",
-                "component": "Label",
-                "readOnly": "true",
+                "component": "ComboBox",
+                "editComponent": "ComboBox",
+                "suggestion": "widget",
+                "filterComponent": "ComboBox"
+            },
+            "itemType": {
+                "label": "Item Type",
+                "importence": "MEDIUM",
+                "component": "ComboBox",
+                "suggestion": "itemType",
+                "editComponent": "ComboBox",
+                "filterComponent": "ComboBox"
+            },
+            "typeId": {
+                "label": "Type Id",
+                "importence": "MEDIUM",
+                "component": "Input",
                 "editComponent": "Input",
                 "filterComponent": "Input"
             }
@@ -940,7 +994,145 @@
         "metadata": {
             "id": null,
             "name": "",
-            "widget": ""
+            "widget": "",
+            "itemType": "",
+            "typeId": null
+        }
+    },
+    "adminPayementGatewayKey": {
+        "search": {
+            "label": "Search by ID",
+            "field": [
+                "_id"
+            ]
+        },
+        "filter": [
+            "type",
+            "status"
+        ],
+        "listPage": [
+            "gatewayID",
+            "type",
+            "status"
+        ],
+        "header": {
+            "headerContent": {
+                "field": [
+                    "gatewayID"
+                ]
+            },
+            "keyInfos": {
+                "field": []
+            },
+            "title": "type",
+            "subTitle": "status",
+            "headerActions": []
+        },
+        "action": {
+            "updateEnabled": "true",
+            "deleteEnabled": "true",
+            "CreateEnabled": "true"
+        },
+        "facet": [
+            {
+                "label": "General Information",
+                "id": "1-GeneralInfo",
+                "type": "fieldGroup",
+                "field": [
+                    "gatewayID",
+                    "publicKey",
+                    "secretKey",
+                    "status",
+                    "type"
+                ]
+            }
+        ],
+        "suggestion": {
+            "status": {
+                "valueType": "constant",
+                "value": [
+                    {
+                        "key": "Active",
+                        "value": "Active"
+                    },
+                    {
+                        "key": "InActive",
+                        "value": "InActive"
+                    }
+                ]
+            },
+            "type": {
+                "valueType": "constant",
+                "value": [
+                    {
+                        "key": "C",
+                        "value": "Card"
+                    },
+                    {
+                        "key": "U",
+                        "value": "UPI"
+                    },
+                    {
+                        "key": "M",
+                        "value": "COD"
+                    }
+                ]
+            }
+        },
+        "property": {
+            "id": {
+                "label": "ID",
+                "importence": "HIGH",
+                "component": "Label",
+                "key": "true",
+                "readOnly": "true",
+                "editComponent": "Input"
+            },
+            "gatewayID": {
+                "label": "Gateway ID",
+                "importence": "MEDIUM",
+                "component": "Input",
+                "editComponent": "Input",
+                "filterComponent": "Input"
+            },
+            "publicKey": {
+                "label": "Public Key",
+                "importence": "MEDIUM",
+                "component": "Input",
+                "editComponent": "Input",
+                "filterComponent": "Input"
+            },
+            "secretKey": {
+                "label": "Secret Key",
+                "importence": "MEDIUM",
+                "component": "Input",
+                "editComponent": "Input",
+                "filterComponent": "Input"
+            },
+            "type": {
+                "label": "Payment Type",
+                "importence": "MEDIUM",
+                "component": "ComboBox",
+                "editComponent": "ComboBox",
+                "suggestion": "type",
+                "filterComponent": "ComboBox"
+            },
+            "status": {
+                "label": "Status",
+                "importence": "MEDIUM",
+                "component": "ComboBox",
+                "suggestion": "status",
+                "editComponent": "ComboBox",
+                "filterComponent": "ComboBox"
+            }
+        },
+        "metadata": {
+            "id": null,
+            "gatewayID": null,
+            "publicKey": "",
+            "secretKey": "",
+            "status": "",
+            "type": ""
         }
     }
 }

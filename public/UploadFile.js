@@ -37,7 +37,7 @@ self.onmessage = (event) => {
         fetch(`${domain}/admin/imageUpload`, {
             method: 'post',
             body: form,
-            headers: {'X-Tenant': 'com.initializers.TestStore'}
+            headers: {'X-Tenant': 'com.initializers.groccerystore1kavf'}
         }).then((response) => {
             response.json().then((data) => {
                 self.postMessage({ msg: "success", tempEntity: tempEntity });
